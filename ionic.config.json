@@ -1,0 +1,7 @@
+{
+  "name": "kerzz",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
