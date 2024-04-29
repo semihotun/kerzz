@@ -1,0 +1,20 @@
+@import '../../../theme/styles.scss';
+
+ion-content {
+    --ion-background-color: $softWhite;
+    @extend .container;
+}
+
+.container {
+    @extend .container;
+    flex-direction: column;
+    background-color: $softWhite;
+}
+
+.header-container {
+    .search-bar {
+        @extend .container;
+    }
+
+    background-color: red;
+}
