@@ -1,0 +1,123 @@
+@import '../../../theme/styles.scss';
+
+ion-card {
+    padding: 0px;
+    background-color: $white;
+    margin: 15px 0px 0px 0px;
+    box-sizing: border-box;
+    height: $card-height;
+    box-shadow: 0 10px 25px $shadowColor;
+
+    .image-container {
+        position: relative;
+
+        img {
+            width: 100% !important;
+            height: 18.47%;
+        }
+
+        .star {
+            .star-icon {
+                margin: 3px;
+                @include GetIcons('../../../assets/icon/star.svg');
+                width: PxToRem(13);
+                height: PxToRem(12.35);
+            }
+
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+            background-color: $red;
+            color: $white;
+            height: 32px;
+            width: Percent(56, 375);
+        }
+    }
+
+    ion-card-header {
+        padding: 10px 10px 5px 10px;
+
+        ion-card-title {
+            color: $dark-blue;
+            font-family: 'Montserrat-SemiBold';
+            vertical-align: center;
+        }
+    }
+
+    ion-card-content {
+        padding-left: 10px;
+
+        .row-1 {
+            height: 15px;
+            margin-bottom: 10px;
+            justify-content: space-between;
+
+            .business-type {
+                width: PxToRem(72);
+                font-size: PxToRem(12);
+                color: Opacity($dark-blue-opacity-50, 0.5);
+                font-family: 'Montserrat-SemiBold';
+            }
+
+            .price {
+                display: flex;
+                justify-content: flex-start;
+
+                .basketIcon {
+                    margin-right: 4px;
+                    @include GetIcons('../../../assets/icon/basket.svg');
+                    width: PxToRem(12);
+                    height: PxToRem(12);
+                }
+
+                .min-price {
+                    line-height: 15px;
+                    font-size: PxToRem(12);
+                    color: Opacity($dark-blue, 0.5);
+                    font-family: 'Montserrat-SemiBold';
+                }
+            }
+        }
+
+        .row-2 {
+            height: 15px;
+            justify-content: space-between;
+
+            .distance {
+                height: PxToRem(15);
+                font-size: PxToRem(12);
+                color: $dark-blue;
+                font-family: 'Montserrat-SemiBold';
+            }
+
+            .business {
+                display: flex;
+                justify-content: flex-start;
+
+                .statusOpen {
+                    font-family: 'Montserrat-SemiBold';
+                    font-size: PxToRem(12);
+                    color: $green;
+                    padding-right: 3px;
+                }
+
+                .statusClose {
+                    font-family: 'Montserrat-SemiBold';
+                    font-size: PxToRem(12);
+                    color: red;
+                    padding-right: 3px;
+                }
+
+                .open-and-close-time {
+                    font-family: 'Montserrat Bold';
+                    font-size: PxToRem(12);
+                    color: Opacity($dark-blue, 50);
+                }
+            }
+        }
+    }
+}

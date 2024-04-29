@@ -1,0 +1,39 @@
+<ion-card>
+  <div class="image-container">
+    <img [src]="getBannerImage(data.images)" />
+    <div class="star">
+      <span class="star-icon"></span>
+      <span class="star-text">{{data.storeInfo.rate}}</span>
+    </div>
+  </div>
+  <ion-card-header>
+    <ion-row>
+      <ion-card-title>{{data.title}}</ion-card-title>
+    </ion-row>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-row class="row row-1">
+      <div class="business-type">{{data.isDinner ? "Yemek" : ""}}</div>
+      <div class="price">
+        <i class="basketIcon"></i>
+        <span class="min-price"> Min. Sipariş Tutarı : {{ data.storeInfo.minOrderPrice | currency:'₺':'symbol':'1.2-2'
+          }}</span>
+      </div>
+    </ion-row>
+    <ion-row class="row row-2">
+      <div class="distance">{{calculateDistance()}} km yakınında</div>
+      <ion-row class="business">
+        <div class="statusOpen" *ngIf="!data.storeInfo.workingHours[0].closed;else isClose;">
+          İşletme Açık
+        </div>
+        <ng-template #isClose>
+          <div class="statusClose">
+            İşletme Kapalı
+          </div>
+        </ng-template>
+        <div class="open-and-close-time">{{data.storeInfo.workingHours[0].open}} /
+          {{data.storeInfo.workingHours[0].close}}</div>
+      </ion-row>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

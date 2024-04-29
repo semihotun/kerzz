@@ -1,0 +1,9 @@
+<div class="title">Sonuçlar</div>
+<ion-list>
+  <div *ngFor="let item of data">
+    <app-card [data]="item" [myCoordinate]="{latitude:latitude,longitude:longitude}"></app-card>
+  </div>
+</ion-list>
+<ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>

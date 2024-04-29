@@ -1,0 +1,12 @@
+@import '../../../theme/styles.scss';
+
+.title {
+    box-sizing: border-box;
+    height: $card-list-height;
+    font-size: PxToRem(14);
+    font-family: 'Montserrat-SemiBold';
+}
+
+ion-list {
+    padding: 0px;
+}
