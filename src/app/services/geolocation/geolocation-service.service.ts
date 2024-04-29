@@ -12,13 +12,17 @@ export class GeolocationService {
   constructor(private locationAccuracy: LocationAccuracy) {
   }
 
-  async getCurrentPosition(): Promise<LocationModel> {
-    const permissionStatus = await Geolocation.checkPermissions();
-    if (permissionStatus?.location != 'granted') {
-      const requestStatus = await Geolocation.requestPermissions();
-      if (requestStatus.location != 'granted') {
-        throw new Error('Hata');
+  async getCurrentPosition(): Promise<LocationModel | null> {
+    try {
+      const permissionStatus = await Geolocation.checkPermissions();
+      if (permissionStatus?.location != 'granted') {
+        const requestStatus = await Geolocation.requestPermissions();
+        if (requestStatus.location != 'granted') {
+          throw new Error('Hata');
+        }
       }
+    } catch (error) {
+      return null;
     }
     if (Capacitor.getPlatform() == 'android') {
       this.enableGps();
@@ -42,7 +46,6 @@ export class GeolocationService {
     }
   }
   openSettings(app = false) {
-    console.log('open settings...');
     return NativeSettings.open({
       optionAndroid: app ? AndroidSettings.ApplicationDetails : AndroidSettings.Location,
       optionIOS: app ? IOSSettings.App : IOSSettings.LocationServices

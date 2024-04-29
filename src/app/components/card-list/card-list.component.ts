@@ -3,7 +3,7 @@ import { CardComponent } from '../card/card.component';
 import { CommonModule } from '@angular/common';
 import { IonicModule, InfiniteScrollCustomEvent } from '@ionic/angular';
 import { UserFeedService } from './../../services/userFeed/user-feed.service';
-import { Subject, takeUntil, } from 'rxjs';
+import { Subject, mergeMap, retry, takeUntil, timer, } from 'rxjs';
 import { ToastController } from '@ionic/angular';
 import { GetUserFeedResponse, UserFeedResponse } from 'src/app/models/userFeed/userFeedResponse';
 import { GetUserFeedRequest } from 'src/app/models/userFeed/userFeedRequest';
@@ -41,12 +41,24 @@ export class CardListComponent implements OnInit, OnDestroy {
     this.onDestroy.next();
   }
   async getGeoLocation() {
-    let data = await this.geolocationService.getCurrentPosition();
-    if (data) {
-      this.latitude = data.latitude;
-      this.longitude = data.longitude;
-      this.getUserFeed();
-    }
+    timer(0, 5000).pipe(
+      mergeMap(async () => {
+        const data = await this.geolocationService.getCurrentPosition();
+        if (data) {
+          this.latitude = data.latitude;
+          this.longitude = data.longitude;
+          this.getUserFeed();
+          return true;
+        } else {
+          const toast = await this.toastController.create({
+            message: 'Konum Bilgini açmalısın',
+            duration: 2000,
+            color: 'danger'
+          });
+          await toast.present();
+          return false;
+        }
+      }),retry(5)).subscribe();
   }
   getRequestForUserFeed(): GetUserFeedRequest {
     let request: GetUserFeedRequest = {
