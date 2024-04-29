@@ -1,0 +1,22 @@
+@import './function.scss';
+// Color
+$softWhite: #fdf8f8fb;
+$white: #FFFFFF;
+$black-opacity-14: rgba(0, 0, 0, 0.14);
+$gray: #707070;
+$dark-blue: #1A1824;
+$green: #34C47C;
+$dark-gray: #040405;
+$dark-blue-opacity-10: rgba(1, 8, 36, 0.10);
+$dark-blue-opacity-50: rgba(26, 24, 36, 0.50);
+$purple-opacity-40: rgba(108, 99, 255, 0.40);
+$red: #B70014;
+$black: #000000;
+$shadowColor:#0108241A;
+// Size
+$container-padding: 4.27%; 
+$container-padding-large: 20%; 
+$toolbar-height:Percent(40,812);
+$input-container-height:Percent(101,812);
+$card-list-height:Percent(18,812);
+$card-height:Percent(260,812);

@@ -1,0 +1,18 @@
+@import './variables.scss';
+@import './function.scss';
+@import './fonts.scss';
+@import './mixin.scss';
+.container{
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+  --padding-end: 4.27%;
+  --padding-start: 4.27%;
+}
+@media (min-width: 900px) {
+  .container{
+    padding-left: 30%;
+    padding-right: 30%;
+    --padding-end: 30%;
+    --padding-start: 30%;
+  }
+}
