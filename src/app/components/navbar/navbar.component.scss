@@ -1,0 +1,43 @@
+@import '../../../theme/styles.scss';
+
+#toolbar {
+    height: $toolbar-height;
+    background-color: $white;
+    --padding-end: 4.27%;
+    --padding-start: 4.27%;
+
+    #leftIcon {
+        width: 5rem;
+
+        #menuIcon {
+            @include GetIcons('../../../assets/icon/menubtn.svg');
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
+
+    #rightIcon {
+        width: 5rem;
+
+        #billIcon {
+            @include GetIcons('../../../assets/icon/bill.svg');
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        #giftIcon {
+            @include GetIcons('../../../assets/icon/gift.svg');
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
+
+    #title {
+        font-family: 'Montserrat-SemiBold';
+        text-align: center;
+        font-size: PxToRem(14);
+        color: $dark-gray;
+        letter-spacing: 0.88pt;
+        line-height: 18px;
+    }
+}
