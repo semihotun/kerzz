@@ -6,7 +6,7 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
-import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './app/interceptors/auth-interceptor.service';
 import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx/index';
 if (environment.production) {
@@ -17,9 +17,8 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     LocationAccuracy,
-    importProvidersFrom(IonicModule.forRoot({})),
+    importProvidersFrom(IonicModule.forRoot({}),HttpClientModule),
     provideRouter(routes),
-    provideHttpClient(withInterceptorsFromDi()),
     {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorService,multi:true},
-  ],
+  ]
 });

@@ -41,13 +41,14 @@ export class CardListComponent implements OnInit, OnDestroy {
     this.onDestroy.next();
   }
   async getGeoLocation() {
-    timer(0, 5000).pipe(
+    let subscribe=timer(0, 5000).pipe(
       mergeMap(async () => {
         const data = await this.geolocationService.getCurrentPosition();
         if (data) {
           this.latitude = data.latitude;
           this.longitude = data.longitude;
           this.getUserFeed();
+          subscribe.unsubscribe();
           return true;
         } else {
           const toast = await this.toastController.create({
@@ -58,7 +59,7 @@ export class CardListComponent implements OnInit, OnDestroy {
           await toast.present();
           return false;
         }
-      }),retry(5)).subscribe();
+      })).subscribe();
   }
   getRequestForUserFeed(): GetUserFeedRequest {
     let request: GetUserFeedRequest = {
@@ -71,21 +72,22 @@ export class CardListComponent implements OnInit, OnDestroy {
   }
   getUserFeed() {
     this.userFeedService.GetFeed(this.getRequestForUserFeed())
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe({
-        next: (data: GetUserFeedResponse) => {
-          this.data = [...this.data, ...data.response];
-          this.skip = this.skip + this.cardSize;
-        },
-        error: async (err: HttpErrorResponse) => {
-          const toast = await this.toastController.create({
-            message: 'Hata oluştu: ' + err.message,
-            duration: 2000,
-            color: 'danger'
-          });
-          await toast.present();
-        }
-      });
+    .pipe(takeUntil(this.onDestroy))
+    .subscribe({
+      next: (data) => {
+        console.log(data);
+        this.data = [...this.data, ...data.response];
+        this.skip = this.skip + this.cardSize;
+      },
+      error: async (err: HttpErrorResponse) => {
+        const toast = await this.toastController.create({
+          message: 'Hata oluştu: ' + err.message,
+          duration: 2000,
+          color: 'danger'
+        });
+        await toast.present();
+      }
+    });
   }
   onIonInfinite(ev: InfiniteScrollCustomEvent) {
     setTimeout(() => {
